@@ -1,0 +1,11 @@
+data_path : "../../Data/synthetic_data.dat"
+data_name : "synthetic"
+output_dir_path : "../../Data/STAD-FEBTE"
+ftrs_tag : ["torque", "depth"]
+label_tag : "label"
+time_type : "varying" 
+time_tag : ["torque_time", "depth_time"]
+catg_incl : False
+catg_tag : null
+n_jobs : 6
+random_state : 42
