@@ -1,5 +1,5 @@
 # Added by me
-*.dat
+# *.dat
 *.pickle
 
 # Byte-compiled / optimized / DLL files
