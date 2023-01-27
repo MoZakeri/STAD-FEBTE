@@ -221,7 +221,7 @@ def save_data(output_dir_path, data_name, X_t, X_tr_t, X_ts_t, X_tr_tf,
 # %%
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Loads the config data for data preprocessing")
-    parser.add_argument("--config_path", type=str, default="../config/preprocess_data_config_synthetic_varying.yaml")
+    parser.add_argument("--config_path", type=str, default="../config/preprocess_data_config_synthetic_fixed.yaml")
     args = parser.parse_args()
 
     with open(args.config_path, "r") as f:
