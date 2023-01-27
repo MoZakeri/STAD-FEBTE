@@ -1,6 +1,7 @@
 """_summary_
 """
 # %%
+import warnings
 import argparse
 import os
 import pickle
@@ -16,9 +17,14 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import accuracy_score, balanced_accuracy_score
 from sklearn.metrics import recall_score, f1_score, roc_auc_score
 from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.exceptions import UndefinedMetricWarning
 
 
 # %%
+def warn(*args, **kwargs):
+    pass
+
+
 class NumpyArrayEncoder(json.JSONEncoder):
     """
     Extends json.JSONEncoder to be able to write numpy arrays into json files.
@@ -93,7 +99,7 @@ def train_defaultHP(model_name, X, y, data_name, n_estimators, n_jobs, model_pat
 
     if model_name.lower() == "bagging":
         model_base = DecisionTreeClassifier(criterion="gini", max_depth=None)
-        model = BaggingClassifier(base_estimator=model_base,
+        model = BaggingClassifier(estimator=model_base,
                                   bootstrap_features=True,
                                   n_estimators=n_estimators,
                                   n_jobs=n_jobs)
@@ -108,7 +114,7 @@ def train_defaultHP(model_name, X, y, data_name, n_estimators, n_jobs, model_pat
 
     elif model_name.lower() == "ada_boost":
         model_base = DecisionTreeClassifier(max_depth=1)  # high bias
-        model = AdaBoostClassifier(base_estimator=model_base,
+        model = AdaBoostClassifier(estimator=model_base,
                                    n_estimators=n_estimators)
 
     elif model_name.lower() == "grad_boost":
@@ -208,6 +214,8 @@ if __name__ == "__main__":
 
     with open(args.config_path, "r") as f:
         config_data = yaml.load(f, Loader=yaml.Loader)
+
+    warnings.warn = warn  # to silence sklearn warnings
     
     data_path = config_data["data_path"]
     dataset_name = config_data["dataset_name"]
