@@ -1,12 +1,11 @@
 data_path : "../data/AAUWSD.dat"  # path of the raw time series data
 data_name : "AAUWSD"  # name of the dataset to save in output
 output_dir_path : "../data/STAD-FEBTE"  # path of the directory of the output data
-# ftrs_tag : ["torque", "current", "angle", "depth"]  # keys of time series in each sample
-ftrs_tag : ["torque"]  # keys of time series in each sample
+ftrs_tag : ["torque", "current", "angle", "depth"]  # keys of time series in each sample
 label_tag : "label"  # label key 
 time_type : "fixed"  # type of the time vector in the dataset - should be in ["fixed", "varying"]
 time_tag : null  # key of the time vectors in each sample
 catg_incl : False  # whether to include categorical features 
 catg_tag : null  # key of the categorical features in each sample
-n_jobs : 6  # number of CPUs involved
+n_jobs : 30  # number of CPUs involved
 random_state : 42  # randome state for reproducing results
