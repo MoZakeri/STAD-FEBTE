@@ -1,6 +1,6 @@
-data_path : "../../Data/AAUWSD.dat"  # path of the raw time series data
+data_path : "../data/AAUWSD.dat"  # path of the raw time series data
 data_name : "AAUWSD"  # name of the dataset to save in output
-output_dir_path : "../../Data/STAD-FEBTE"  # path of the directory of the output data
+output_dir_path : "../data/STAD-FEBTE"  # path of the directory of the output data
 # ftrs_tag : ["torque", "current", "angle", "depth"]  # keys of time series in each sample
 ftrs_tag : ["torque"]  # keys of time series in each sample
 label_tag : "label"  # label key 
