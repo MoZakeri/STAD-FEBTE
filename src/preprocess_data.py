@@ -199,7 +199,7 @@ def save_data(output_dir_path, data_name, X_t, X_tr_t, X_ts_t, X_tr_tf,
         y_ts (pd.Series): output label vector of X_ts_t and X_ts_tf
         y_tr_b (pd.Series): output label vector of X_tr_tf_b
     """
-    print(f"Saving locally at {output_dir_path} ...")
+    print(f"Saving results locally at {output_dir_path} ...")
     data_out = dict(
         X_t = X_t,  
         X_tr_t = X_tr_t,
