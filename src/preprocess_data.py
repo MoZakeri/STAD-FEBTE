@@ -1,5 +1,6 @@
 """
-_summary_
+Module for applying data preparation, feature extraction, feature selection, and anomaly generation on a time series
+dataset. 
 """
 # %%
 import warnings
@@ -35,7 +36,6 @@ def load_data(data_path):
     print(f"Loading data in {data_path} ...")
     with open(data_path, "rb") as f:
         dataset = pickle.load(f)
-    dataset = dataset[:100]  # for test
     return dataset
 
 
@@ -67,7 +67,6 @@ def prepare_data(dataset, time_type, time_tag, ftrs_tag, label_tag):
             X_I = pd.DataFrame()
             X_I["id"] = None  # palceholder for id
             if time_tag is not None:
-                print("Here")
                 X_I["time"] = data_I["time"]
             else:
                 X_I["time"] = np.arange(len(data_I[ftrs_tag[0]]))
@@ -160,7 +159,6 @@ def my_select_features(X_t, y, random_state, n_jobs):
         y_ts (pd.Series): output label vector of X_ts_t and X_ts_tf
     """
     print("Feature Selection ...")
-    y[-20:] = 1  # for test
     X_tr_t, X_ts_t, y_tr, y_ts = train_test_split(
         X_t, y, stratify=y, random_state=random_state)
     X_tr_tf = select_features(X_tr_t, y_tr, n_jobs=n_jobs)
@@ -199,7 +197,7 @@ def save_data(output_dir_path, data_name, X_t, X_tr_t, X_ts_t, X_tr_tf,
         X_tr_tf_b (pd.DataFrame): design matrix of balanced filtered tabular training set
         y_tr (pd.Series): output label vector of X_tr_t and X_tr_tf
         y_ts (pd.Series): output label vector of X_ts_t and X_ts_tf
-        y_tr_b (pd.Series): output label vector of X_tr_tf_b 
+        y_tr_b (pd.Series): output label vector of X_tr_tf_b
     """
     print(f"Saving locally at {output_dir_path} ...")
     data_out = dict(
@@ -223,7 +221,7 @@ def save_data(output_dir_path, data_name, X_t, X_tr_t, X_ts_t, X_tr_tf,
 # %%
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Loads the config data for data preprocessing")
-    parser.add_argument("--config_path", type=str, default="../config/preprocess_data_config_synthetic.yaml")
+    parser.add_argument("--config_path", type=str, default="../config/preprocess_data_config_synthetic_varying.yaml")
     args = parser.parse_args()
 
     with open(args.config_path, "r") as f:
@@ -242,12 +240,9 @@ if __name__ == "__main__":
     random_state = config_data["random_state"]
 
     dataset = load_data(data_path) 
-    dataset = dataset[:100]  # for test
     X, y = prepare_data(dataset, time_type, time_tag, ftrs_tag, label_tag)
     X_t = my_extract_features(X, time_type, n_jobs, catg_incl, catg_tag)
-    y[-20:] = 1  # for test
     X_tr_t, X_ts_t, X_tr_tf, X_ts_tf, y_tr, y_ts = my_select_features(X_t, y, random_state, n_jobs)
     X_tr_tf_b, y_tr_b = generate_anomalies(X_tr_tf, y_tr)
     save_data(output_dir_path, data_name, X_t, X_tr_t, X_ts_t, X_tr_tf,
               X_ts_tf, X_tr_tf_b, y_tr, y_ts, y_tr_b)
-    
