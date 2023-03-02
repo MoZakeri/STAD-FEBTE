@@ -1,0 +1,124 @@
+## Description ## 
+# preprocess : 
+#   data_path : path of the raw time series data in [dict1, dict2, ...] format, saved as binary (.dat file)
+#   data_name : name of the dataset
+#   tab_path : target path of the tabular dataset 
+#   ftrs_tag : keys of the time series measurements in each sample ; pass in a list even if single
+#   label_tag : key of the label in each sample
+#   time_tag : key of the time vector(s) in each sample ; set to null if not available
+#   time_type : type of the time vector of the dataset ; should be one of the {"fixed", "varying"}
+#   depth : depth of feature extraction  ; should be one of the {"minimal", "efficient", "comprehensive"}
+#   n_jobs : number of CPUs involved in data preprocessing
+#   catg_incl : whether to include categorical features
+#   catg_tag : key of the categorical features in each sample ; set to null if not available
+#   random_state : randome state for reproducing results
+
+# train : 
+#   tab_path_ : dated child directory of tab_path to read the target tabular dataset from
+#   model_path : path to save trained models
+#   model_names : list of tree-based ensembles to train ; should be in ["bagging", "rf", "extra_trees", "ada_boost", "grad_boost"] ; pass in a list even if single
+#   train_on_FE : Boolean ; whether to train the model on the output of FE module
+#   train_on_FS : Boolean ; whether to train the model on the output of FS module
+#   n_estimators : no. estimators in ensemble trees
+#   n_jobs : no. CPUs involved in training
+## Description ##
+
+## synthetic_fixed ##
+# preprocess : 
+#   data_path : "../data/raw/synthetic_fixed.dat"  
+#   data_name : "synthetic_fixed"  
+#   tab_path : "../data/tab"
+#   ftrs_tag : ["torque", "depth"] 
+#   label_tag : "label"  
+#   time_tag : "time"  
+#   time_type : "fixed" 
+#   depth : "minimal"  
+#   n_jobs : 6  
+#   catg_incl : False  
+#   catg_tag : null  
+#   random_state : 42  
+
+# train : 
+#   tab_path_ : "../data/tab/2023_02_24 - 00_29/synthetic_fixed.dat" 
+#   model_path : "../models"  
+#   model_names : ["bagging", "rf", "extra_trees", "ada_boost", "grad_boost"] 
+#   train_on_FE : True  
+#   train_on_FS : True  
+#   n_estimators : 50  
+#   n_jobs : 30  
+## synthetic_fixed ##
+
+## synthetic_varying ##
+# preprocess : 
+#   data_path : "../data/raw/synthetic_varying.dat"
+#   data_name : "synthetic_varying"  
+#   tab_path : "../data/tab"
+#   ftrs_tag : ["torque", "depth"]  
+#   label_tag : "label"  
+#   time_tag : ["torque_time", "depth_time"]  
+#   time_type : "varying"  
+#   depth : "minimal"  
+#   n_jobs : 6  
+#   catg_incl : False  
+#   catg_tag : null  
+#   random_state : 42 
+
+# train : 
+#   tab_path_ : "../data/tab/2023_02_24 - 00_32/synthetic_varying.dat" 
+#   model_path : "../models"
+#   model_names : ["bagging", "rf", "extra_trees", "ada_boost", "grad_boost"]  
+#   train_on_FE : True 
+#   train_on_FS : True 
+#   n_estimators : 50  
+#   n_jobs : 6  
+## synthetic_varying ##
+
+## AAUWSD ##
+preprocess : 
+  data_path : "../data/raw/AAUWSD.dat"
+  data_name : "AAUWSD"  
+  tab_path : "../data/tab"
+  ftrs_tag : ["torque", "current", "angle", "depth"]  
+  label_tag : "label"  
+  time_tag : null  
+  time_type : "fixed"  
+  depth : "minimal"  
+  n_jobs : 30  
+  catg_incl : False  
+  catg_tag : null  
+  random_state : 42 
+
+train : 
+  tab_path_ : "../data/tab/2023_02_24 - 00_37/AAUWSD.dat" 
+  model_path : "../models" 
+  model_names : ["ada_boost", "bagging", "extra_trees", "grad_boost", "rf"]  
+  train_on_FE : False 
+  train_on_FS : False 
+  n_estimators : 500  
+  n_jobs : 30  
+## AAUWSD ##
+
+## AURSAD ##
+# preprocess : 
+#   data_path : "../data/raw/AURSAD.dat"
+#   data_name : "AURSAD"  
+#   tab_path : "../data/tab"
+#   ftrs_tag : ["torque", "tcp_pose_0", "tcp_pose_1", "tcp_pose_2", "tcp_pose_3", "tcp_pose_4", "tcp_pose_5", "tcp_speed_0", "tcp_speed_1", "tcp_speed_2", "tcp_speed_3", "tcp_speed_4", "tcp_speed_5", "tcp_force_0", "tcp_force_1", "tcp_force_2", "tcp_force_3", "tcp_force_4", "tcp_force_5"]  
+#   label_tag : "label"  
+#   time_tag : "time"  
+#   time_type : "fixed"  
+#   depth : "minimal"  
+#   n_jobs : 30  
+#   catg_incl : False  
+#   catg_tag : null  
+#   random_state : 42 
+
+# train : 
+#   tab_path_ : "../data/tab/2023_02_24 - 00_40/AURSAD.dat" 
+#   model_path : "../models"
+#   model_names : ["ada_boost", "bagging", "extra_trees", "grad_boost", "rf"]  
+#   train_on_FE : False 
+#   train_on_FS : False 
+#   n_estimators : 500  
+#   n_jobs : 30  
+## AURSAD ##

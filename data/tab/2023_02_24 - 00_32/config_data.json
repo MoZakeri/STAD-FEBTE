@@ -1,0 +1,20 @@
+{
+  "data_path": "../data/raw/synthetic_varying.dat",
+  "data_name": "synthetic_varying",
+  "tab_path": "../data/tab",
+  "ftrs_tag": [
+    "torque",
+    "depth"
+  ],
+  "label_tag": "label",
+  "time_tag": [
+    "torque_time",
+    "depth_time"
+  ],
+  "time_type": "varying",
+  "depth": "minimal",
+  "n_jobs": 6,
+  "catg_incl": false,
+  "catg_tag": null,
+  "random_state": 42
+}

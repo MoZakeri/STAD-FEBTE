@@ -1,6 +1,7 @@
 # Added by me
-# *.dat
-# *.pickle
+*.dat
+*.pickle
+*.pptx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
